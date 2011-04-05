@@ -1,5 +1,5 @@
 <?php
-
+// Oauth PHP class for visualizeus API interaction.
 require_once( $GLOBALS['ROOT_DIR'] .'/includes/oauth-php/core/init.php');
 include_once( $GLOBALS['ROOT_DIR'] .'/includes/oauth-php/OAuthRequester.php');
 
@@ -18,7 +18,7 @@ class userTokenOauthVisualizeUs{
     var $service_url = 'http://api.visualizeus.com/v2/';
     var $request_token_url = 'http://api.visualizeus.com/oauth/request_token';
     var $authorize_url = 'http://testingss.visualizeus.com/oauth/authorize';
-    var $access_token_url = 'http://apivisualizeus.com/oauth/access_token';
+    var $access_token_url = 'http://api.visualizeus.com/oauth/access_token';
     var $authenticate_url = 'http://api.visualizeus.com/api/authenticate';
     var $read_url = 'http://api.visualizeus.com/api/read';
     var $write_url = 'http://api.visualizeus.com/api/write';
@@ -309,8 +309,6 @@ class userTokenOauthVisualizeUs{
     function deleteBookmark($uId, $username,$bId,  $bhash){
         /*$params = array(
             //'oauth_token' => $_SESSION['oauth_token'],
-            //'redirect_url' => '/pobreiluso/',
-            //'destination_url' => '/pobreiluso/'
             //    'commentId' => $commentId,
                 //'page' => 3,
                 //'perpage' => 14,
