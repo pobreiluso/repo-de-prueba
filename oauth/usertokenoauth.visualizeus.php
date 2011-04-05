@@ -1,7 +1,7 @@
 <?php
 // Oauth PHP class for visualizeus API interaction.
 require('./visualizeus/oauth/oauth.init.php');
-include('./visualizeus/oauth/OAuthRequester.php');
+include('./visualizeus/oauth/oauth-php/OAuthRequester.php');
 
 
 class userTokenOauthVisualizeUs{
