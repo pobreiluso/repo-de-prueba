@@ -9,7 +9,9 @@
 * @access public 
 * @copyright VisualizeUs
 * 
-*/ 
+*/
+
+require_once('./visualizeus/plain/plain.init.php');
 
 class userTokenPlainVisualizeUs {
     var $consumer_key;

@@ -1,0 +1,6 @@
+Prerequisites: 
+php oauth extension and libpcre-dev:
+#$ apt-get install libpcre-dev
+#$ pecl install oauth
+
+add oauth.ini in /etc/php5/conf.d/ or wathever your path is and restart php5 or apache or wathever your php is attached to.

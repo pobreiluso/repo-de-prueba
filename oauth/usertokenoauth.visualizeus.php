@@ -1,7 +1,7 @@
 <?php
 // Oauth PHP class for visualizeus API interaction.
-require_once( $GLOBALS['ROOT_DIR'] .'/includes/oauth-php/core/init.php');
-include_once( $GLOBALS['ROOT_DIR'] .'/includes/oauth-php/OAuthRequester.php');
+require('./visualizeus/oauth/oauth.init.php');
+include('./visualizeus/oauth/OAuthRequester.php');
 
 
 class userTokenOauthVisualizeUs{

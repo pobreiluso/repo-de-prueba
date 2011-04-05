@@ -32,7 +32,7 @@
  */
 
 
-require_once dirname(__FILE__) . '/OAuthStore.php';
+#require_once dirname(__FILE__) . '/OAuthStore.php';
 require_once dirname(__FILE__) . '/OAuthRequest.php';
 
 
@@ -56,7 +56,7 @@ class OAuthRequestSigner extends OAuthRequest
 	 */
 	function __construct ( $request, $method = null, $params = null, $body = null )
 	{
-		$this->store = OAuthStore::instance();
+		//$this->store = OAuthStore::instance();
 		
 		if (is_string($params))
 		{
