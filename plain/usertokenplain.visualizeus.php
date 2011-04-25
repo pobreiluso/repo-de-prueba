@@ -138,7 +138,7 @@ class userTokenPlainVisualizeUs {
      */
     function getBookmarks($params){
         
-        $request_uri = 'users/'.$params['username'].'/bookmarks'.$format;
+        $request_uri = 'users/'.$params['username'].'/bookmarks'.$this->format;
         $result = $this->doRequest($this->service_url.$request_uri, $params);
         
         return $result;
@@ -157,7 +157,7 @@ class userTokenPlainVisualizeUs {
      **/
     function getBookmarkDetails($params){
         
-        $request_uri = 'bookmarks/'.$params['bhash'].$format;
+        $request_uri = 'bookmarks/'.$params['bhash'].$this->format;
         $result = $this->doRequest($this->service_url.$request_uri, $params);
         
         return $result;
@@ -177,7 +177,7 @@ class userTokenPlainVisualizeUs {
      *
      **/
     function getRelatedBookmarks($params){
-        $request_uri = 'bookmarks/'.$params['bhash'].'/related'.$format;
+        $request_uri = 'bookmarks/'.$params['bhash'].'/related'.$this->format;
         $result = $this->doRequest($this->service_url.$request_uri, $params);
         return $result;
     }
@@ -196,7 +196,7 @@ class userTokenPlainVisualizeUs {
      *
      **/
     function getBookmarkComments($params){
-        $request_uri = 'bookmarks/'.$params['bhash'].'/comments'.$format;
+        $request_uri = 'bookmarks/'.$params['bhash'].'/comments'.$this->format;
         $result = $this->doRequest($this->service_url.$request_uri, $params);
 
         return $result;
@@ -224,7 +224,7 @@ class userTokenPlainVisualizeUs {
                 'page' => 3,
                 'perpage' => 14
             );*/
-        $request_uri = 'bookmarks/recent'.$format;
+        $request_uri = 'bookmarks/recent'.$this->format;
         $result = $this->doRequest($this->service_url.$request_uri, $params);        
         return $result;
     }
@@ -243,7 +243,7 @@ class userTokenPlainVisualizeUs {
      *
      **/
     function getPopularBookmarks($params){
-        $request_uri = 'bookmarks/popular'.$format;
+        $request_uri = 'bookmarks/popular'.$this->format;
         $result = $this->doRequest($this->service_url.$request_uri, $params);
         
         return $result;
@@ -263,7 +263,7 @@ class userTokenPlainVisualizeUs {
      *
      **/
     function getTagBookmarks($params){
-        $request_uri = 'bookmarks/tags/'.$params['tag'].$format;
+        $request_uri = 'bookmarks/tags/'.$params['tag'].$this->format;
         $result = $this->doRequest($this->service_url.$request_uri, $params);
         
         return $result;
@@ -281,7 +281,7 @@ class userTokenPlainVisualizeUs {
      *
      **/
     function getUserProfile($params){
-        $request_uri = 'users/'.$params['username'].$format;
+        $request_uri = 'users/'.$params['username'].$this->format;
         $result = $this->doRequest($this->service_url.$request_uri, $params);
         
         return $result;
@@ -302,7 +302,7 @@ class userTokenPlainVisualizeUs {
      **/
 
     function getUserFollowing($params){
-        $request_uri = 'users/'.$params['username'].'/following'.$format;
+        $request_uri = 'users/'.$params['username'].'/following'.$this->format;
         $result = $this->doRequest($this->service_url.$request_uri, $params);
 
         return $result;
@@ -323,7 +323,7 @@ class userTokenPlainVisualizeUs {
      **/
 
     function getUserFollowers($params){
-        $request_uri = 'users/'.$params['username'].'/followers'.$format;
+        $request_uri = 'users/'.$params['username'].'/followers'.$this->format;
         
         $result = $this->doRequest($this->service_url.$request_uri, $params);
         return $result;
@@ -344,7 +344,7 @@ class userTokenPlainVisualizeUs {
      **/
 
     function getUserWatchlist($params){
-        $request_uri = 'users/'.$params['username'].'/following/bookmarks'.$format;
+        $request_uri = 'users/'.$params['username'].'/following/bookmarks'.$this->format;
         $result = $this->doRequest($this->service_url.$request_uri, $params);
         
         return $result;
@@ -365,7 +365,7 @@ class userTokenPlainVisualizeUs {
      **/
 
     function getUserBookmarks($params){
-        $request_uri = 'users/'.$params['username'].'/bookmarks'.$format;
+        $request_uri = 'users/'.$params['username'].'/bookmarks'.$this->format;
         $result = $this->doRequest($this->service_url.$request_uri, $params);
         
         return $result;
@@ -385,7 +385,7 @@ class userTokenPlainVisualizeUs {
      *
      **/
     function getUserTagsBookmarks($params){
-        $request_uri = 'users/'.$params['username'].'/bookmarks/tags/'.$params['tags'].$format;
+        $request_uri = 'users/'.$params['username'].'/bookmarks/tags/'.$params['tags'].$this->format;
         $result = $this->doRequest($this->service_url.$request_uri, $params);
         
         return $result;
@@ -405,7 +405,7 @@ class userTokenPlainVisualizeUs {
      *
      **/    
     function getUserTags($params){
-        $request_uri = 'users/'.$params['username'].'/tags'.$format;
+        $request_uri = 'users/'.$params['username'].'/tags'.$this->format;
         $result = $this->doRequest($this->service_url.$request_uri, $params);
         
         return $result;
@@ -427,7 +427,7 @@ class userTokenPlainVisualizeUs {
      **/
 
     function search($params){
-        $request_uri = 'search/'.$params['range'].'/'.$params['terms'].$format;
+        $request_uri = 'search/'.$params['range'].'/'.$params['terms'].$this->format;
         $result = $this->doRequest($this->service_url.$request_uri, $params);
         
         return $result;
