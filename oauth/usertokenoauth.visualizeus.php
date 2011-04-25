@@ -1,8 +1,7 @@
 <?php
 // Oauth PHP class for visualizeus API interaction.
-require('./visualizeus/oauth/oauth.init.php');
-include('./visualizeus/oauth/oauth-php/OAuthRequester.php');
-
+require_once( $GLOBALS['ROOT_DIR'] .'/includes/oauth-php/core/init.php');
+include_once( $GLOBALS['ROOT_DIR'] .'/includes/oauth-php/OAuthRequester.php');
 
 class userTokenOauthVisualizeUs{
     var $consumer_key;
@@ -14,9 +13,11 @@ class userTokenOauthVisualizeUs{
     var $oauth_token_secret;
     var $signature_methods= array('HMAC-SHA1','PLAINTEXT');
     var $username;
+    var $format = '.json';
     
     var $service_url = 'http://api.visualizeus.com/v2/';
-    var $request_token_url = 'http://api.visualizeus.com/oauth/request_token';
+    var $request_token_url = 'http://testingss.visualizeus.com/oauth/request_token';
+    var $request_uri  =  'http://testingss.visualizeus.com/oauth/request_uri';
     var $authorize_url = 'http://testingss.visualizeus.com/oauth/authorize';
     var $access_token_url = 'http://api.visualizeus.com/oauth/access_token';
     var $authenticate_url = 'http://api.visualizeus.com/api/authenticate';
@@ -27,8 +28,6 @@ class userTokenOauthVisualizeUs{
     var $VisualizeUsOauthObject;
     
     function __construct($params) {
-        //$this->consumer_key = $GLOBALS['VisualizeUsConsumerKey'];
-        //$this->consumer_secret = $GLOBALS['VisualizeUsConsumerSecret'];        
         $this->consumer_key=$params['consumer_key'];
         $this->consumer_secret=$params['consumer_secret'];
         $this->oauth_token=$params['token'];
@@ -36,6 +35,11 @@ class userTokenOauthVisualizeUs{
         
         $this->VisualizeUsOauthObject = new OAuth($this->consumer_key,$this->consumer_secret,OAUTH_SIG_METHOD_HMACSHA1,OAUTH_AUTH_TYPE_URI);
         //$this->VisualizeUsOauthObject->enableDebug();
+    }
+    
+    function requestAuthorizationUri(){
+        $uri = $request_uri.'/?consumer_key='.$this->consumer_key;
+        return $uri;
     }
 
     function setTokens(){
@@ -57,7 +61,7 @@ class userTokenOauthVisualizeUs{
     }
     
     function getBookmarks($uId, $params){
-        $request_uri = 'user/'.$params['username'].'/bookmarks/';
+        $request_uri = 'users/'.$params['username'].'/bookmarks'.$format;
         $uri = $this->service_url.$request_uri;
 
         $result = $this->doRequest($uId, $uri, 'GET', $params);
@@ -66,7 +70,7 @@ class userTokenOauthVisualizeUs{
     }
 
     function getBookmarkDetails($uId, $params){
-        $request_uri = 'bookmarks/'.$params['bhash'];
+        $request_uri = 'bookmarks/'.$params['bhash'].$format;
         $uri = $this->service_url.$request_uri;
         
         $result = $this->doRequest($uId, $uri, 'GET', $params);
@@ -80,7 +84,7 @@ class userTokenOauthVisualizeUs{
                 'perpage' => 14,
                 'bHahs'=>$bhash
             );*/
-        $request_uri = 'bookmarks/'.$params['bhash'].'/related/';
+        $request_uri = 'bookmarks/'.$params['bhash'].'/related'.$format;
         $uri = $this->service_url.$request_uri;
         
         $result = $this->doRequest($uId, $uri, 'GET', $params);
@@ -89,7 +93,7 @@ class userTokenOauthVisualizeUs{
     }
     
     function getBookmarkComments($uId, $params){
-        $request_uri = 'bookmarks/'.$params['bhash'].'/comments/';
+        $request_uri = 'bookmarks/'.$params['bhash'].'/comments'.$format;
         $uri = $this->service_url.$request_uri;
         
         $result = $this->doRequest($uId, $uri, 'GET', $params);
@@ -98,7 +102,7 @@ class userTokenOauthVisualizeUs{
     }
 
     function addBookmarkComment($uId, $params){
-        $request_uri = 'bookmarks/'.$params['bhash'].'/comments/';
+        $request_uri = 'bookmarks/'.$params['bhash'].'/comments'.$format;
         $uri = $this->service_url.$request_uri;
         
         $result = $this->doRequest($uId, $uri, 'POST', $params);
@@ -107,7 +111,7 @@ class userTokenOauthVisualizeUs{
     }
     
     function deleteBookmarkComment($uId, $params){
-        $request_uri = 'bookmarks/'.$params['bhash'].'/comments/';
+        $request_uri = 'bookmarks/'.$params['bhash'].'/comments'.$format;
         $uri = $this->service_url.$request_uri;
         
         $result = $this->doRequest($uId, $uri, 'DELETE', $params);
@@ -117,7 +121,7 @@ class userTokenOauthVisualizeUs{
 
 
     function getRecentBookmarks($uId, $params){
-        $request_uri = 'bookmarks/recent/';
+        $request_uri = 'bookmarks/recent'.$format;
         $uri = $this->service_url.$request_uri;
         
         $result = $this->doRequest($uId, $uri, 'GET', $params);
@@ -126,7 +130,7 @@ class userTokenOauthVisualizeUs{
     }
 
     function getPopularBookmarks($uId, $params){
-        $request_uri = 'bookmarks/popular/';
+        $request_uri = 'bookmarks/popular'.$format;
         $uri = $this->service_url.$request_uri;
         
         $result = $this->doRequest($uId, $uri, 'GET', $params);
@@ -136,7 +140,7 @@ class userTokenOauthVisualizeUs{
     
     
     function getTagBookmarks($uId, $params){
-        $request_uri = 'bookmarks/tag/'.$params['tag'].'/';
+        $request_uri = 'bookmarks/tags/'.$params['tag'].$format;
         $uri = $this->service_url.$request_uri;
         
         $result = $this->doRequest($uId, $uri, 'GET', $params);
@@ -145,7 +149,7 @@ class userTokenOauthVisualizeUs{
     }
     
     function getUserProfile($uId, $params){
-        $request_uri = 'user/'.$params['username'].'/';
+        $request_uri = 'users/'.$params['username'].$format;
         $uri = $this->service_url.$request_uri;
         
         $result = $this->doRequest($uId, $uri, 'GET', $params);
@@ -154,7 +158,7 @@ class userTokenOauthVisualizeUs{
     }
 
     function getUserFollowing($uId, $params){
-        $request_uri = 'user/'.$params['username'].'/following/';
+        $request_uri = 'users/'.$params['username'].'/following'.$format;
         $uri = $this->service_url.$request_uri;
         
         $result = $this->doRequest($uId, $uri, 'GET', $params);
@@ -162,7 +166,7 @@ class userTokenOauthVisualizeUs{
     }
 
     function getUserFollowers($uId, $params){
-        $request_uri = 'user/'.$params['username'].'/followers/';
+        $request_uri = 'users/'.$params['username'].'/followers'.$format;
         $uri = $this->service_url.$request_uri;
         
         $result = $this->doRequest($uId, $uri, 'GET', $params);
@@ -171,7 +175,7 @@ class userTokenOauthVisualizeUs{
     }
 
     function getUserWatchlist($uId, $params){
-        $request_uri = 'user/'.$params['username'].'/following/bookmarks/';
+        $request_uri = 'users/'.$params['username'].'/following/bookmarks'.$format;
         $uri = $this->service_url.$request_uri;
         
         $result = $this->doRequest($uId, $uri, 'GET', $params);
@@ -181,7 +185,7 @@ class userTokenOauthVisualizeUs{
     
 
     function addUserWatch($uId, $params){
-        $request_uri = 'user/'.$params['username'].'/following/';
+        $request_uri = 'users/'.$params['username'].'/following'.$format;
         $uri = $this->service_url.$request_uri;
         
         $result = $this->doRequest($uId, $uri, 'POST', $params);
@@ -194,7 +198,7 @@ class userTokenOauthVisualizeUs{
                 'username2' => $params['username']
             );
         
-        $request_uri = 'user/'.$params['username'].'/following/';
+        $request_uri = 'users/'.$params['username'].'/following'.$format;
         $uri = $this->service_url.$request_uri;
         
         $result = $this->doRequest($uId, $uri, 'DELETE', $params);
@@ -204,7 +208,7 @@ class userTokenOauthVisualizeUs{
 
 
     function getUserBookmarks($uId, $params){
-        $request_uri = 'user/'.$params['username'].'/bookmarks/';
+        $request_uri = 'users/'.$params['username'].'/bookmarks'.$format;
         $uri = $this->service_url.$request_uri;
         
         $result = $this->doRequest($uId, $uri, 'GET', $params);
@@ -213,7 +217,7 @@ class userTokenOauthVisualizeUs{
     }    
 
     function getUserTagsBookmarks($uId, $params){
-        $request_uri = 'user/'.$params['username'].'/bookmarks/tag/'.$params['tags'].'/';
+        $request_uri = 'users/'.$params['username'].'/bookmarks/tags/'.$params['tags'].$format;
         $uri = $this->service_url.$request_uri;
         
         $result = $this->doRequest($uId, $uri, 'GET', $params);
@@ -222,7 +226,7 @@ class userTokenOauthVisualizeUs{
     }
     
     function getUserTags($uId, $params){
-        $request_uri = 'user/'.$params['username'].'/tags/';
+        $request_uri = 'users/'.$params['username'].'/tags'.$format;
         $uri = $this->service_url.$request_uri;
         
         $result = $this->doRequest($uId, $uri, 'GET', $params);
@@ -233,7 +237,7 @@ class userTokenOauthVisualizeUs{
 
 
     function renameUserTags($uId, $params){
-        $request_uri = 'user/'.$params['username'].'/tags/'.$params['tag'].'/';
+        $request_uri = 'users/'.$params['username'].'/tags/'.$params['tag'].$format;
         $uri = $this->service_url.$request_uri;
         
         $result = $this->doRequest($uId, $uri, 'PUT', $params);
@@ -257,7 +261,7 @@ class userTokenOauthVisualizeUs{
                 'hash' => $params['bHash']
             );*/
         
-        $request_uri = 'user/'.$params['username'].'/bookmarks/';
+        $request_uri = 'users/'.$params['username'].'/bookmarks'.$format;
         $uri = $this->service_url.$request_uri;
         
         $result = $this->doRequest($uId, $uri, 'POST', $params);
@@ -277,7 +281,7 @@ class userTokenOauthVisualizeUs{
                 'hash' => $params['bhash'],
                 'id' => $params['bId']
             );*/
-        $request_uri = 'user/'.$params['username'].'/bookmarks/'.$params['hash'].'/';
+        $request_uri = 'users/'.$params['username'].'/bookmarks/'.$params['hash'].$format;
         $uri = $this->service_url.$request_uri;
         
         $result = $this->doRequest($uId, $uri, 'PUT', $params);
@@ -297,7 +301,7 @@ class userTokenOauthVisualizeUs{
                 'action' => $params['action'],
                 'hash' => $params['bHash']
             );*/
-        $request_uri = 'user/'.$params['username'].'/bookmarks/'.$params['bhash'].'/';
+        $request_uri = 'users/'.$params['username'].'/bookmarks/'.$params['bhash'].$format;
         $uri = $this->service_url.$request_uri;
         
         $result = $this->doRequest($uId, $uri, 'POST', $params);
@@ -324,7 +328,7 @@ class userTokenOauthVisualizeUs{
                 'hash' => $hash,
                 'id' => $bId
             );*/
-        $request_uri = 'user/'.$params['username'].'/bookmarks/'.$params['bhash'].'/';
+        $request_uri = 'users/'.$params['username'].'/bookmarks/'.$params['bhash'].$format;
         $uri = $this->service_url.$request_uri;
         
         $result = $this->doRequest($uId, $uri, 'DELETE', $params);
@@ -339,7 +343,7 @@ class userTokenOauthVisualizeUs{
             'terms'=>$terms,
         );*/
         
-        $request_uri = 'search/'.$params['range'].'/'.$params['terms'].'/';
+        $request_uri = 'search/'.$params['range'].'/'.$params['terms'].$format;
         $uri = $this->service_url.$request_uri;
         
         $result = $this->doRequest($uId, $uri, 'GET', $params);
