@@ -1,7 +1,7 @@
 <?php 
 
-require_once('./oauth/usertokenplain.visualizeus.php');
-require_once('./oauth/plain.init.php');
+require_once('../plain/usertokenplain.visualizeus.php');
+require_once('../plain/plain.init.php');
 $visualizeusPlain = new userTokenPlainVisualizeus(VISUALIZEUS_API_KEY,VISUALIZEUS_API_SECRET,VISUALIZEUS_API_USER);
 
 $bhash = 'b528340eee08a827c8caa61387d79d0e';

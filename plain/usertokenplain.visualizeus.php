@@ -97,8 +97,10 @@ class userTokenPlainVisualizeUs {
                CURLOPT_TIMEOUT => 30,
             ));
             // request URL
-            if ($sResult = curl_exec($oCurl)) {
-               switch (curl_getinfo($oCurl, CURLINFO_HTTP_CODE)) {
+            $sResult = curl_exec($oCurl);
+            $responseCode = curl_getinfo($oCurl, CURLINFO_HTTP_CODE);
+            curl_close($oCurl);
+            switch ($responseCode) {
                   case 200:
    	               return $sResult;
                      break;
@@ -109,15 +111,16 @@ class userTokenPlainVisualizeUs {
                      $this->lastError = '401 Forbidden';
                      break;
                   default:
-                     $this->lastError = 'Connection failed, check service URL and params.';
-               }
+                     $this->lastError = $responseCode.'Connection failed, check service URL and params.';
             }
             // close session
-            curl_close($oCurl);
+            header('HTTP/1.1 '.$this->lastError);
+            header('WWW-Authenticate: Plain realm=""');
+            header('Content-Type: text/plain; charset=utf8');
             
             return false;
          }else{
-            return "curl_init doestn exists";
+            return "curl_init doesnt exists";
          }
     }
         

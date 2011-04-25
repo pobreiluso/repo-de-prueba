@@ -1,6 +1,6 @@
 <?php 
-    require_once('./visualizeus/oauth/usertokenoauth.visualizeus.php');
-    require_once('./visualizeus/oauth/oauth.init.php');
+    require_once('../oauth/usertokenoauth.visualizeus.php');
+    require_once('../oauth/oauth.init.php');
     $options['consumer_key']=VISUALIZEUS_CONSUMER_KEY;
     $options['consumer_secret']=VISUALIZEUS_CONSUMER_SECRET;
     $options['token']='server-provided-user-token-here';
