@@ -1,10 +1,11 @@
 <?php 
     require_once('./visualizeus/oauth/usertokenoauth.visualizeus.php');
+    require_once('./visualizeus/oauth/oauth.init.php');
     $options['consumer_key']=VISUALIZEUS_CONSUMER_KEY;
     $options['consumer_secret']=VISUALIZEUS_CONSUMER_SECRET;
     $options['token']='server-provided-user-token-here';
     $options['token_secret']='server-provided-usert-token-secret-here';
-    $currentUserID='9'; // Visualizeus UserID for the tokens gave.
+    $currentUserID='uId'; // Visualizeus UserID for the tokens gave.
     
     $bhash = 'b528340eee08a827c8caa61387d79d0e'; // Bhash for the tryout.
     $username='username-here';

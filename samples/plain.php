@@ -1,7 +1,8 @@
 <?php 
 
-require_once('./usertokenplain.visualizeus.php');
-$visualizeusPlain = new userTokenPlainVisualizeus('e4c81b63ddabaf7f5badba8dd22f7b4604d7ded3d','0263ca640b1d71dcc69516dc010378e3','pobreiluso');
+require_once('./oauth/usertokenplain.visualizeus.php');
+require_once('./oauth/plain.init.php');
+$visualizeusPlain = new userTokenPlainVisualizeus(VISUALIZEUS_API_KEY,VISUALIZEUS_API_SECRET,VISUALIZEUS_API_USER);
 
 $bhash = 'b528340eee08a827c8caa61387d79d0e';
 $username = 'pobreiluso';
